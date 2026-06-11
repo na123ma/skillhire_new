@@ -26,7 +26,7 @@ connectDB().then(() => createAdmin()).catch((error) => {
 });
 
 const allowedOrigins = [
-  "https://skillhire-pro.netlify.app",
+  "https://skillhire-pro.netlify.app/",
   "http://localhost:3000",
   "http://localhost:5500",
   "http://127.0.0.1:5500"
