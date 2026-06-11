@@ -1,4 +1,4 @@
-const loginForm =
+  const loginForm =
 document.getElementById(
 "loginForm"
 );
