@@ -81,7 +81,7 @@ showStatus("Creating your account…", false);
 try {
   const response =
   await fetch(
-  "http://localhost:5080/api/auth/register",
+  "https://skillhire-new.onrender.com/api/auth/register",
   {
   method:"POST",
 
@@ -101,7 +101,7 @@ try {
   if(response.ok){
     showStatus(data.message || "Registration successful. Redirecting to login…", false);
     setTimeout(() => {
-      window.location.href = "login.html";
+      window.location.href = "index.html";
     }, 800);
   }
   else{
