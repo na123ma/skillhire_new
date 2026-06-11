@@ -2,7 +2,7 @@ const token =
 localStorage.getItem("token");
 
 if(!token){
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 window.history.pushState(null, "", window.location.href);
@@ -261,7 +261,7 @@ function showExamStatus(message, isError = false) {
 
 async function fetchQuestions(){
     try {
-        const profileResponse = await fetch("http://localhost:5080/api/auth/profile", {
+        const profileResponse = await fetch("https://skillhire-new.onrender.com/api/auth/profile", {
             headers: { Authorization: "Bearer " + token }
         });
         const profile = await profileResponse.json();
@@ -287,7 +287,7 @@ async function fetchQuestions(){
         localStorage.setItem("testCompleted", String(Boolean(profile.testCompleted)));
         const response =
         await fetch(
-        "http://localhost:5080/api/exam/start",
+        "https://skillhire-new.onrender.com/api/exam/start",
         {
             headers:{
                 Authorization:
@@ -573,7 +573,7 @@ showExamStatus("Submitting your answers…", false);
 try {
 const response =
 await fetch(
-"http://localhost:5080/api/exam/submit",
+"https://skillhire-new.onrender.com/api/exam/submit",
 {
 method:"POST",
 
@@ -660,7 +660,7 @@ screenshot=""
 ){
 
 await fetch(
-"http://localhost:5080/api/violation/create",
+"https://skillhire-new.onrender.com/api/violation/create",
 {
 method:"POST",
 
