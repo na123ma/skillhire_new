@@ -4,22 +4,22 @@ const resultsTableBody = document.getElementById("resultsTableBody");
 const statusText = document.getElementById("statusText");
 
 if (!token || role !== "admin") {
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 async function loadAdminData() {
   try {
     const [dashboardResponse, resultsResponse, violationsResponse, usersResponse] = await Promise.all([
-      fetch("http://localhost:5080/api/admin/dashboard", {
+      fetch("https://skillhire-new.onrender.com/api/admin/dashboard", {
         headers: { Authorization: "Bearer " + token }
       }),
-      fetch("http://localhost:5080/api/admin/results", {
+      fetch("https://skillhire-new.onrender.com/api/admin/results", {
         headers: { Authorization: "Bearer " + token }
       }),
-      fetch("http://localhost:5080/api/admin/violations", {
+      fetch("https://skillhire-new.onrender.com/api/admin/violations", {
         headers: { Authorization: "Bearer " + token }
       }),
-      fetch("http://localhost:5080/api/admin/users", {
+      fetch("https://skillhire-new.onrender.com/api/admin/users", {
         headers: { Authorization: "Bearer " + token }
       })
     ]);
@@ -150,7 +150,7 @@ loadAdminData();
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("token");
   localStorage.removeItem("role");
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 });
 
 document.getElementById("exportBtn").addEventListener("click", downloadCsv);
