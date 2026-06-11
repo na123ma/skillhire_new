@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SkillHire Dashboard | Assessment Portal</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%8A%3C/text%3E%3C/svg%3E">
+    <style>
+        /* ============================================
+           PREMIUM USER DASHBOARD - EXAM DETAILS STYLES
+           Classic, Attractive, Fully Functional
+        ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #f0f4fa 0%, #e8edf5 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Animated background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="40" cy="40" r="3" fill="rgba(59,130,246,0.05)"/><circle cx="160" cy="80" r="4" fill="rgba(59,130,246,0.04)"/><circle cx="100" cy="150" r="5" fill="rgba(59,130,246,0.03)"/></svg>');
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dashboard {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Section */
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #2d3e5f 50%, #1e3a5f 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            color: #5b6e8c;
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+        }
+
+        /* User Info Card */
+        #userInfo {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem;
+            margin: 1.5rem 0 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #userInfo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a);
+        }
+
+        .user-profile-row {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-circle {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.4);
+        }
+
+        .avatar-circle span {
+            font-size: 2.3rem;
+            font-weight: 500;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .welcome-text {
+            flex: 1;
+        }
+
+        .greeting {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #6c7a91;
+            font-weight: 600;
+        }
+
+        .user-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+
+        /* Exam Details Card - NEW */
+        .exam-details-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fefeff 100%);
+            border-radius: 28px;
+            padding: 1.75rem;
+            margin: 1.5rem 0;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.06);
+            transition: all 0.25s ease;
+        }
+
+        .exam-details-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 32px -14px rgba(0, 0, 0, 0.1);
+        }
+
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f4fa;
+        }
+
+        .exam-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .exam-title h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .exam-badge {
+            background: #eef2ff;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .time-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fef3c7;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #d97706;
+        }
+
+        /* Two sections grid */
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .section-card {
+            background: #fafcff;
+            border-radius: 20px;
+            padding: 1.25rem;
+            border: 1px solid #eef2f8;
+            transition: all 0.2s;
+        }
+
+        .section-card:hover {
+            background: white;
+            border-color: #d1dbe8;
+            box-shadow: 0 6px 14px -8px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-details {
+            font-size: 0.8rem;
+            color: #5b6e8c;
+            line-height: 1.5;
+        }
+
+        .question-count {
+            display: inline-block;
+            background: #eef2ff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-top: 0.5rem;
+        }
+
+        /* Exam info row */
+        .exam-info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eef2f8;
+        }
+
+        .info-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        .device-check-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .device-check-btn {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            padding: 0.8rem 1.1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            width:30%;
+            margin-bottom:20px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 18px -10px rgba(59, 130, 246, 0.35);
+        }
+
+        .device-check-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 24px -12px rgba(59, 130, 246, 0.45);
+            width:30%;
+            margin-bottom:20px;
+        }
+
+        .device-check-btn:disabled {
+            cursor: wait;
+            opacity: 0.9;
+            width:30%;
+            margin-bottom:20px;
+        }
+
+        .device-check-btn.is-ready {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            color: #047857;
+            border-color: #a7f3d0;
+            box-shadow: 0 10px 18px -10px rgba(16, 185, 129, 0.35);
+            width:30%;
+            margin-bottom:20px;
+        }
+
+        /* Start Button - Primary CTA */
+        #startTestBtn, .start-assignment-btn {
+            background: linear-gradient(105deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: 0.01em;
+        }
+
+        #startTestBtn:hover, .start-assignment-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(105deg, #2563eb 0%, #1e3a8a 100%);
+            box-shadow: 0 18px 30px -12px rgba(37, 99, 235, 0.6);
+        }
+
+        #startTestBtn:active {
+            transform: translateY(1px);
+        }
+
+        /* Status badge for completed test */
+        .completion-status {
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Info panel */
+        .info-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 1rem 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+            .user-name { font-size: 1.3rem; }
+            .avatar-circle { width: 60px; height: 60px; }
+            .avatar-circle span { font-size: 1.8rem; }
+            .sections-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            #startTestBtn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>SkillHire Assessment</h1>
+        <div class="subhead">Complete your evaluation to unlock premium opportunities</div>
+    </div>
+
+    <!-- User info injected -->
+    <div id="userInfo">
+        <div class="loading-spinner" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 2rem;">
+            <span>Loading profile...</span>
+        </div>
+    </div>
+
+    <!-- Exam Details section - shows when user hasn't taken test -->
+    <div id="examDetailsContainer"></div>
+
+    <!-- Info panel with instructions -->
+    <div class="info-panel">
+        <div class="info-message" style="display: flex; align-items: center; gap: 0.75rem;">
+            
+            <span style="font-size: 0.85rem;">Once started, the timer cannot be paused. Ensure stable internet.</span>
+        </div>
+        <div class="badge-classic" style="background:#eef2ff; padding:0.3rem 0.9rem; border-radius:30px; font-size:0.7rem;">⏱️ Best performance matters</div>
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // ENHANCED USER DASHBOARD WITH EXAM DETAILS
+    // Aptitude + Reasoning (30 questions | 30 mins)
+    // ============================================
+
+    (function() {
+        
+        // ----- Helper functions for user data -----
+        function getUserData() {
+            let user = null;
+            try {
+                const storedUser = localStorage.getItem('user');
+                if (storedUser) user = JSON.parse(storedUser);
+                if (!user) {
+                    const sessionUser = sessionStorage.getItem('user');
+                    if (sessionUser) user = JSON.parse(sessionUser);
+                }
+                if (!user && window.authUser) user = window.authUser;
+                if (!user) {
+                    const email = localStorage.getItem('userEmail') || localStorage.getItem('email');
+                    const name = localStorage.getItem('userName') || localStorage.getItem('name');
+                    if (email || name) {
+                        user = { name: name || email?.split('@')[0] || 'Candidate', email: email || 'user@skillhire.com', fullName: name || 'Skill Seeker' };
+                    } else {
+                        user = { name: 'Guest User', fullName: 'Guest User', email: 'guest@skillhire.com', isDemo: true };
+                    }
+                }
+                return user;
+            } catch(e) { return { name: 'Candidate', email: 'candidate@skillhire.com', fullName: 'Valued Candidate' }; }
+        }
+
+        function formatUserName(user) {
+            if (user.fullName && user.fullName !== 'undefined') return user.fullName;
+            if (user.name && user.name !== 'undefined') return user.name;
+            if (user.displayName) return user.displayName;
+            if (user.email) return user.email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            return 'Professional';
+        }
+
+        function getInitials(name) {
+            if (!name) return 'U';
+            const parts = name.trim().split(/\s+/);
+            if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+            return (parts[0].charAt(0) + parts[parts.length-1].charAt(0)).toUpperCase();
+        }
+
+        // ----- Check if user has already taken the test -----
+        async function syncUserCompletionStatus() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return false;
+                const response = await fetch('http://localhost:5080/api/auth/profile', {
+                    headers: { Authorization: 'Bearer ' + token }
+                });
+                if (!response.ok) return false;
+                const user = await response.json();
+                localStorage.setItem('testCompleted', String(Boolean(user.testCompleted)));
+                localStorage.setItem('userName', user.username || user.email || 'Candidate');
+                localStorage.setItem('userEmail', user.email || 'candidate@skillhire.com');
+                localStorage.setItem('user', JSON.stringify({
+                    name: user.username || user.email || 'Candidate',
+                    fullName: user.username || user.email || 'Candidate',
+                    email: user.email || 'candidate@skillhire.com'
+                }));
+                return Boolean(user.testCompleted);
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function hasUserTakenTest() {
+            const testCompleted = localStorage.getItem('testCompleted') === 'true';
+            const examSubmitted = localStorage.getItem('examSubmitted') === 'true';
+            const testResults = localStorage.getItem('testResults');
+            const skillScore = localStorage.getItem('skillHireScore');
+            if (testCompleted || examSubmitted) return true;
+            if (testResults && JSON.parse(testResults)?.length > 0) return true;
+            if (skillScore && parseInt(skillScore) >= 0) return true;
+            if (localStorage.getItem('submittedAt')) return true;
+            return false;
+        }
+
+        // ----- Render User Info (profile card) -----
+        function renderUserInfo() {
+            const container = document.getElementById('userInfo');
+            if (!container) return;
+            const user = getUserData();
+            const displayName = formatUserName(user);
+            const userEmail = user.email || 'Not provided';
+            const initials = getInitials(displayName);
+            const currentHour = new Date().getHours();
+            let timeGreeting = 'Good day';
+            if (currentHour < 12) timeGreeting = 'Good morning';
+            else if (currentHour < 18) timeGreeting = 'Good afternoon';
+            else timeGreeting = 'Good evening';
+
+            container.innerHTML = `
+                <div class="user-profile-row">
+                    <div class="avatar-circle"><span>${escapeHtml(initials)}</span></div>
+                    <div class="welcome-text">
+                        <div class="greeting">${timeGreeting},</div>
+                        <div class="user-name">${escapeHtml(displayName)}</div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;"><span>📧</span> ${escapeHtml(userEmail)}</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;"><span>🎓</span> Candidate Portal</div>
+                    </div>
+                    <button id="logoutBtn" type="button" onclick="localStorage.clear(); sessionStorage.clear(); window.location.href='login.html';" style="width:10%; min-width:110px; background:#ef4444; color:#fff; border:none; border-radius:999px; padding:0.65rem 1rem; font-weight:600; cursor:pointer; box-shadow:0 10px 20px -12px rgba(239,68,68,0.6);">Logout</button>
+                </div>
+            `;
+        }
+
+        // ----- EXAM DETAILS SECTION (Aptitude + Reasoning) -----
+        function renderExamDetails() {
+            const examContainer = document.getElementById('examDetailsContainer');
+            if (!examContainer) return;
+            
+            const testTaken = hasUserTakenTest();
+            
+            if (testTaken) {
+                // Show "Test Completed" elegant message
+                examContainer.innerHTML = `
+                    <div class="exam-details-card" style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-left: 4px solid #10b981;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="font-size: 2rem;"></span>
+                                <div>
+                                    <h3 style="font-size: 1.3rem; font-weight: 700; color: #065f46;">Assessment Completed</h3>
+                                    <p style="color: #047857; margin-top: 0.25rem;">Thank you for completing the SkillHire evaluation.</p>
+                                </div>
+                            </div>
+                            <div class="completion-status">✓ Completed</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // If test not taken, show complete exam details + start assignment button
+            const examHTML = `
+                <div class="exam-details-card">
+                    <div class="exam-header">
+                        <div class="exam-title">
+                            <span style="font-size: 1.8rem;"></span>
+                            <h3>Skill Assessment: Aptitude & Reasoning</h3>
+                            <div class="exam-badge">Mandatory</div>
+                        </div>
+                        <div class="time-badge">
+                            ⏱️ 30 minutes total
+                        </div>
+                    </div>
+                    
+                    <div class="sections-grid">
+                        <!-- Aptitude Section -->
+                        <div class="section-card">
+                            <div class="section-icon"></div>
+                            <div class="section-name">Quantitative Aptitude</div>
+                            <div class="section-details">
+                                Numerical ability, data interpretation, arithmetic, percentages, ratios, profit & loss, averages.
+                            </div>
+                            <div class="question-count">15 Questions</div>
+                        </div>
+                        
+                        <!-- Reasoning Section -->
+                        <div class="section-card">
+                            <div class="section-icon"></div>
+                            <div class="section-name">Logical Reasoning</div>
+                            <div class="section-details">
+                                Puzzles, blood relations, syllogisms, seating arrangements, coding-decoding, analogies, critical thinking.
+                            </div>
+                            <div class="question-count">15 Questions</div>
+                        </div>
+                    </div>
+                    
+                    <div class="exam-info-row">
+                        <div class="info-chip">
+                            <span>⏳</span> Total Duration: 30 Minutes
+                        </div>
+                        <div class="info-chip">
+                            <span>📋</span> Total Questions: 30
+                        </div>
+                        <div class="info-chip">
+                            <span></span> Each question: 1 mark
+                        </div>
+                        <div class="info-chip">
+                            <span>⚠️</span> No negative marking
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 1.8rem; text-align: center;">
+                        <div class="device-check-row">
+                            <button id="testCameraBtn" type="button" class="device-check-btn">Test Camera</button>
+                            <button id="testMicrophoneBtn" type="button" class="device-check-btn">Test Microphone</button>
+                        </div>
+                        <button id="startAssignmentBtn" class="start-assignment-btn" disabled>
+                            Start Assignment &nbsp;→
+                        </button>
+                        <p id="deviceStatus" style="font-size: 0.85rem; color: #4b5563; margin-top: 0.75rem;">Test both camera and microphone before starting.</p>
+                        <p style="font-size: 0.7rem; color: #6c7a91; margin-top: 0.35rem;">Ensure stable connection. Timer starts immediately.</p>
+                    </div>
+                </div>
+            `;
+            
+            examContainer.innerHTML = examHTML;
+            
+            let startBtn = document.getElementById('startAssignmentBtn');
+            let cameraReady = false;
+            let microphoneReady = false;
+
+            function updateStartButtonState() {
+                if (!startBtn) return;
+                const ready = cameraReady && microphoneReady;
+                startBtn.disabled = !ready;
+                startBtn.style.opacity = ready ? '1' : '0.6';
+                startBtn.style.cursor = ready ? 'pointer' : 'not-allowed';
+            }
+
+            updateStartButtonState();
+
+            const testCameraBtn = document.getElementById('testCameraBtn');
+            const testMicrophoneBtn = document.getElementById('testMicrophoneBtn');
+
+            async function testCameraAccess() {
+                const deviceStatus = document.getElementById('deviceStatus');
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+                    stream.getTracks().forEach(track => track.stop());
+                    cameraReady = true;
+                    if (testCameraBtn) {
+                        testCameraBtn.textContent = 'Camera Ready ✓';
+                        testCameraBtn.classList.add('is-ready');
+                    }
+                    if (deviceStatus) {
+                        deviceStatus.textContent = 'Camera is ready. You can now test the microphone.';
+                        deviceStatus.style.color = '#15803d';
+                    }
+                } catch (error) {
+                    cameraReady = false;
+                    if (testCameraBtn) {
+                        testCameraBtn.classList.remove('is-ready');
+                        testCameraBtn.textContent = 'Test Camera';
+                    }
+                    if (deviceStatus) {
+                        deviceStatus.textContent = 'Camera test failed. Please allow camera access and try again.';
+                        deviceStatus.style.color = '#dc2626';
+                    }
+                }
+                updateStartButtonState();
+            }
+
+            async function testMicrophoneAccess() {
+                const deviceStatus = document.getElementById('deviceStatus');
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
+                    stream.getTracks().forEach(track => track.stop());
+                    microphoneReady = true;
+                    if (testMicrophoneBtn) {
+                        testMicrophoneBtn.textContent = 'Microphone Ready ✓';
+                        testMicrophoneBtn.classList.add('is-ready');
+                    }
+                    if (deviceStatus) {
+                        deviceStatus.textContent = 'Microphone is ready. You can now test the camera.';
+                        deviceStatus.style.color = '#15803d';
+                    }
+                } catch (error) {
+                    microphoneReady = false;
+                    if (testMicrophoneBtn) {
+                        testMicrophoneBtn.classList.remove('is-ready');
+                        testMicrophoneBtn.textContent = 'Test Microphone';
+                    }
+                    if (deviceStatus) {
+                        deviceStatus.textContent = 'Microphone test failed. Please allow microphone access and try again.';
+                        deviceStatus.style.color = '#dc2626';
+                    }
+                }
+                updateStartButtonState();
+            }
+
+            if (testCameraBtn) {
+                testCameraBtn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    testCameraBtn.disabled = true;
+                    testCameraBtn.classList.remove('is-ready');
+                    testCameraBtn.textContent = 'Testing Camera…';
+                    await testCameraAccess();
+                    testCameraBtn.disabled = false;
+                    if (!cameraReady) {
+                        testCameraBtn.textContent = 'Test Camera';
+                    }
+                });
+            }
+
+            if (testMicrophoneBtn) {
+                testMicrophoneBtn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    testMicrophoneBtn.disabled = true;
+                    testMicrophoneBtn.classList.remove('is-ready');
+                    testMicrophoneBtn.textContent = 'Testing Microphone…';
+                    await testMicrophoneAccess();
+                    testMicrophoneBtn.disabled = false;
+                    if (!microphoneReady) {
+                        testMicrophoneBtn.textContent = 'Test Microphone';
+                    }
+                });
+            }
+
+            if (startBtn) {
+                const newStartBtn = startBtn.cloneNode(true);
+                startBtn.parentNode.replaceChild(newStartBtn, startBtn);
+                startBtn = newStartBtn;
+                updateStartButtonState();
+                newStartBtn.addEventListener('click', async function(e) {
+                    e.preventDefault();
+                    const deviceStatus = document.getElementById('deviceStatus');
+                    if (!deviceStatus) return;
+
+                    deviceStatus.textContent = 'Checking camera and microphone access…';
+                    deviceStatus.style.color = '#4b5563';
+
+                    try {
+                        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                            throw new Error('Camera and microphone access is not supported in this browser.');
+                        }
+
+                        if (!cameraReady || !microphoneReady) {
+                            throw new Error('Please test both camera and microphone before starting the exam.');
+                        }
+
+                        const stream = await navigator.mediaDevices.getUserMedia({
+                            video: { facingMode: 'user' },
+                            audio: true
+                        });
+
+                        stream.getTracks().forEach(track => track.stop());
+
+                        localStorage.setItem('currentExam', JSON.stringify({
+                            name: 'SkillHire Aptitude + Reasoning',
+                            totalQuestions: 30,
+                            duration: 30,
+                            sections: ['Aptitude', 'Reasoning'],
+                            startTime: new Date().toISOString()
+                        }));
+                        localStorage.setItem('examDeviceStatus', JSON.stringify({ camera: true, microphone: true }));
+
+                        deviceStatus.textContent = 'Camera and microphone are ready. Starting exam…';
+                        deviceStatus.style.color = '#15803d';
+
+                        const targetUrl = window.location.pathname.includes('dashboard.html') ? 'exam.html' : './exam.html';
+
+                        const examWindow = window.open(
+                            targetUrl,
+                            '_blank',
+                            'noopener=yes,fullscreen=yes,toolbar=no,menubar=no,location=no,status=no,resizable=yes,width=' +
+                                Math.max(1200, screen.availWidth) + ',height=' + Math.max(800, screen.availHeight)
+                        );
+
+                        if (examWindow) {
+                            examWindow.focus();
+                        } else {
+                            console.warn('Popup blocked. Please allow popups to open the exam in full screen.');
+                            deviceStatus.textContent = 'Popup blocked. Please allow popups and try again.';
+                            deviceStatus.style.color = '#dc2626';
+                            return;
+                        }
+
+                    } catch (error) {
+                        console.error('Device access check failed:', error);
+                        deviceStatus.textContent = 'Camera and microphone access are required to begin the exam.';
+                        deviceStatus.style.color = '#dc2626';
+                    }
+                });
+            }
+        }
+        
+        // ----- also attach fallback for original startTestBtn if exists (ID kept for compatibility)-----
+        function setupOriginalStartButton() {
+            const legacyBtn = document.getElementById('startTestBtn');
+            if (legacyBtn && !hasUserTakenTest()) {
+                // Replace or enhance to show exam details
+                legacyBtn.style.display = 'none'; // hide duplicate, we use our assignment button
+            } else if (legacyBtn && hasUserTakenTest()) {
+                legacyBtn.style.display = 'none';
+            }
+        }
+        
+        // escape helper
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        // Watch for changes in test status (if user takes test externally)
+        async function monitorTestStatus() {
+            await syncUserCompletionStatus();
+            renderUserInfo();
+            renderExamDetails();
+            setupOriginalStartButton();
+            
+            // Listen for storage events to re-render exam section if test completed in another tab
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'testCompleted' || e.key === 'testResults' || e.key === 'skillHireScore') {
+                    renderExamDetails();
+                    renderUserInfo();
+                }
+            });
+            
+            // poll for local changes (simple sync)
+            let lastTaken = hasUserTakenTest();
+            setInterval(() => {
+                const nowTaken = hasUserTakenTest();
+                if (nowTaken !== lastTaken) {
+                    lastTaken = nowTaken;
+                    renderExamDetails();
+                    renderUserInfo();
+                }
+            }, 1500);
+        }
+        
+        // Initialize everything
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                monitorTestStatus();
+            });
+        } else {
+            monitorTestStatus();
+        }
+        
+        // Expose for debugging
+        window.refreshDashboard = () => {
+            renderUserInfo();
+            renderExamDetails();
+        };
+    })();
+</script>
+
+<!-- Original dashboard.js remains untouched - will also execute -->
+<script src="./js/dashboard.js"></script>
+</body>
+</html>

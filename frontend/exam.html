@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SkillHire Examination | Aptitude & Reasoning</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* ============================================
+           PROFESSIONAL EXAM PAGE - PERFECT ALIGNMENTS
+           Clean, Modern, Proctor-Ready UI
+           All original IDs and functionality preserved
+        ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #f0f4fa 0%, #e2e8f2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Subtle pattern overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 25% 40%, rgba(59, 130, 246, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Main exam container - elegant centered layout */
+        .exam-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header section */
+        .exam-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 3px solid #3b82f6;
+        }
+
+        .exam-header h2 {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .exam-header h2::before {
+            content: '📋';
+            font-size: 1.3rem;
+        }
+
+        #timer {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #facc15;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Round title */
+        #roundTitle {
+            background: #f8fafc;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        #roundTitle::before {
+            content: '🎯';
+            font-size: 1.2rem;
+        }
+
+        /* Device status */
+        #deviceStatus {
+            background: #eff6ff;
+            margin: 0;
+            padding: 0.75rem 2rem;
+            color: #1e40af;
+            font-weight: 500;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #dbeafe;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #deviceStatus::before {
+            content: '🖥️';
+            font-size: 1rem;
+        }
+
+        /* Monitoring section - professional card layout */
+        .monitoring-section {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            padding:30px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            justify-items: center;
+            align-items: start;
+            
+        }
+
+        .monitoring-section > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        video {
+            border-radius: 18px;
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            box-shadow: 0 10px 24px -10px rgba(15, 23, 42, 0.35);
+            border: 1px solid #dbe4f0;
+            transition: all 0.2s;
+            width: 100%;
+            max-width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        video:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 12px 24px -12px rgba(59, 130, 246, 0.3);
+        }
+
+        #cameraStatus, #audioStatus {
+            font-size: 0.82rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #475569;
+            line-height: 1.35;
+        }
+
+        #cameraStatus::before {
+            content: '📷';
+        }
+
+        #audioStatus::before {
+            content: '🎙️';
+        }
+
+        /* Main two-column layout for the exam page */
+        .exam-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.25rem 0.75rem 1.25rem;
+            background: #fff;
+        }
+
+        .panel-card {
+            background: #ffffff;
+            border: 1px solid #e5efff;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+            overflow: hidden;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .camera-card {
+            position: sticky;
+            top: 1rem;
+            padding: 1rem;
+        }
+
+        .camera-card h3 {
+            font-size: 0.95rem;
+            color: #1e293b;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .warning-box {
+            margin-top: 0.5rem;
+            padding: 0.65rem 0.75rem;
+            border-radius: 12px;
+            color: #9a5b00;
+            font-size: 0.82rem;
+            line-height: 1.35;
+            min-height: 2.2rem;
+        }
+
+        .warning-box.warning-error {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #b91c1c;
+        }
+
+        .warning-box.warning-ok {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            color: #047857;
+        }
+
+        /* Question container - spacious and readable */
+        #questionContainer {
+            padding: 1rem 1rem 0.25rem 1rem;
+            min-height: 320px;
+            background: white;
+            width: 100%;
+        }
+
+        /* Style for dynamic question rendering */
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #0f172a;
+            line-height: 1.5;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #eef2f8;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 0.8rem 1rem;
+            background: #fafcff;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .option-item:hover {
+            background: #f0f4fe;
+            border-color: #3b82f6;
+            transform: translateX(4px);
+        }
+
+        .option-radio {
+            width: 18px;
+            height: 18px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .option-label {
+            font-size: 1rem;
+            color: #334155;
+            flex: 1;
+            cursor: pointer;
+            line-height: 1.35;
+            padding-top: 1px;
+        }
+
+        /* Button group - perfect alignment */
+        .button-group {
+            padding: 1rem 2rem 1.25rem 2rem;
+            display: flex;
+            justify-content: flex-start;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+            background: #fafcff;
+            border-top: 1px solid #eef2f8;
+            width: 100%;
+        }
+
+        button {
+            background: white;
+            border: 1px solid #dbe4f0;
+            padding: 0.55rem 1rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: inherit;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #334155;
+            display: inline-flex;
+            align-items: center;
+            width: auto;
+            gap: 0.45rem;
+            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+        }
+
+        button:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        #prevBtn::before {
+            content: '←';
+            font-size: 1rem;
+        }
+
+        #nextBtn::after {
+            content: '→';
+            font-size: 1rem;
+        }
+
+        #prevBtn,
+        #nextBtn,
+        #submitRoundBtn {
+            min-width: 92px;
+            justify-content: center;
+        }
+
+        #submitRoundBtn {
+            background: linear-gradient(105deg, #3b82f6, #2563eb);
+            border: none;
+            color: white;
+            box-shadow: 0 6px 14px rgba(59, 130, 246, 0.25);
+        }
+
+        #submitRoundBtn:hover {
+            background: linear-gradient(105deg, #2563eb, #1d4ed8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        #submitRoundBtn:active {
+            transform: translateY(0);
+        }
+
+        /* Question navigation indicator */
+        .question-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eef2f8;
+        }
+
+        .q-counter {
+            font-size: 0.8rem;
+            background: #eef2ff;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* canvas hidden but original preserved */
+        #canvas {
+            display: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            body {
+                padding: 1rem;
+            }
+            .exam-header {
+                padding: 1rem 1.5rem;
+            }
+            .exam-header h2 {
+                font-size: 1.1rem;
+            }
+            #timer {
+                font-size: 1.1rem;
+                padding: 0.4rem 1rem;
+            }
+            .monitoring-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            video {
+                width: 100%;
+                max-width: 320px;
+                height: auto;
+            }
+            #questionContainer {
+                padding: 1.5rem;
+            }
+            .question-text {
+                font-size: 1.1rem;
+            }
+            .button-group {
+                padding: 1.2rem;
+                gap: 0.8rem;
+            }
+            button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            button {
+                width: 100%;
+                justify-content: center;
+            }
+            .exam-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Scrollbar classy */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #eef2f8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Focus states */
+        button:focus-visible, .option-radio:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="exam-container">
+    <div class="exam-header">
+        <h2 id="examTitle">Loading user…</h2>
+        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+            <div id="timer">30:00</div>
+        </div>
+    </div>
+
+    <div class="exam-main">
+        <div class="left-panel">
+            <div class="panel-card">
+                <div id="roundTitle">Aptitude Round</div>
+                <div id="deviceStatus">Checking camera and microphone…</div>
+                <div id="questionContainer">
+                    <!-- Question will be injected dynamically by exam.js -->
+                </div>
+            </div>
+        </div>
+
+        <aside class="right-panel">
+            <div class="panel-card camera-card">
+                <h3>Camera & Voice Check</h3>
+                <div class="monitoring-section">
+                    <video id="video" autoplay muted playsinline></video>
+                    <div>
+                        <p id="cameraStatus" style="color:#555;">Allow camera access to continue.</p>
+                        <p id="audioStatus" style="color:#555;">Allow microphone access for voice monitoring.</p>
+                        <div id="warningBox" class="warning-box" aria-live="polite"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <canvas id="canvas" style="display:none"></canvas>
+
+    <div class="button-group">
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+        <button id="submitRoundBtn">Submit Round</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="./js/exam.js"></script>
+<script>
+    // ============================================
+    // ENHANCED EXAM PAGE - PROFESSIONAL POLISH
+    // Preserves all original exam.js functionality
+    // Adds smooth UI enhancements & layout fixes
+    // ============================================
+    
+    (function() {
+        // This script ensures perfect alignment and adds question progress indicator
+        // without breaking any existing exam.js methods or event listeners.
+        
+        // Wait for DOM and exam.js to possibly load first, then enhance.
+        function enhanceQuestionDisplay() {
+            const questionContainer = document.getElementById('questionContainer');
+            if (!questionContainer) return;
+            
+            // Watch for changes in the container (exam.js populates questions)
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length) {
+                        // Add progress indicator if not already present
+                        if (!document.querySelector('.question-progress') && questionContainer.children.length > 0) {
+                            const existingTitle = questionContainer.querySelector('.question-text');
+                            if (existingTitle && !questionContainer.querySelector('.question-progress')) {
+                                const progressDiv = document.createElement('div');
+                                progressDiv.className = 'question-progress';
+                                
+                                // Try to get current question index from any global variable
+                                let currentQ = window.currentQuestionIndex !== undefined ? window.currentQuestionIndex : 1;
+                                let totalQ = window.totalQuestions || 30;
+                                
+                                const counterSpan = document.createElement('span');
+                                counterSpan.className = 'q-counter';
+                                counterSpan.innerText = `Question ${currentQ} of ${totalQ}`;
+                                
+                                const statusSpan = document.createElement('span');
+                                statusSpan.className = 'q-status';
+                                statusSpan.style.fontSize = '0.7rem';
+                                statusSpan.style.color = '#6c7a91';
+                                statusSpan.innerText = 'Select an option';
+                                
+                                progressDiv.appendChild(counterSpan);
+                                progressDiv.appendChild(statusSpan);
+                                
+                                if (questionContainer.firstChild) {
+                                    questionContainer.insertBefore(progressDiv, questionContainer.firstChild);
+                                } else {
+                                    questionContainer.appendChild(progressDiv);
+                                }
+                                
+                                // Update status when radio changes
+                                const updateStatus = () => {
+                                    const selected = questionContainer.querySelector('input[type="radio"]:checked');
+                                    if (statusSpan) {
+                                        if (selected) {
+                                            statusSpan.innerHTML = '✓ Answer saved';
+                                            statusSpan.style.color = '#10b981';
+                                        } else {
+                                            statusSpan.innerHTML = ' Select an option';
+                                            statusSpan.style.color = '#6c7a91';
+                                        }
+                                    }
+                                };
+                                
+                                questionContainer.addEventListener('change', function(e) {
+                                    if (e.target && e.target.type === 'radio') {
+                                        updateStatus();
+                                    }
+                                });
+                                updateStatus();
+                            }
+                        }
+                        
+                        // Also ensure options have proper styling classes
+                        const radioInputs = questionContainer.querySelectorAll('input[type="radio"]');
+                        radioInputs.forEach(radio => {
+                            if (!radio.classList.contains('option-radio')) {
+                                radio.classList.add('option-radio');
+                            }
+                            // Wrap labels nicely
+                            const label = radio.nextElementSibling;
+                            if (label && label.tagName === 'LABEL' && !label.classList.contains('option-label')) {
+                                label.classList.add('option-label');
+                            }
+                            const parent = radio.parentElement;
+                            if (parent && parent.tagName === 'DIV' && !parent.classList.contains('option-item')) {
+                                parent.classList.add('option-item');
+                            }
+                        });
+                    }
+                });
+            });
+            
+            observer.observe(questionContainer, { childList: true, subtree: true });
+            
+            // Also update counter when window question index changes (polling safe)
+            let lastIndex = -1;
+            setInterval(() => {
+                if (window.currentQuestionIndex !== undefined && window.currentQuestionIndex !== lastIndex) {
+                    lastIndex = window.currentQuestionIndex;
+                    const counterSpan = document.querySelector('.q-counter');
+                    if (counterSpan && window.totalQuestions) {
+                        counterSpan.innerText = `Question ${lastIndex + 1} of ${window.totalQuestions}`;
+                    }
+                }
+            }, 200);
+        }
+        
+        // Enhance device status messages to be more friendly
+        function enhanceDeviceStatus() {
+            const deviceStatusDiv = document.getElementById('deviceStatus');
+            if (deviceStatusDiv && deviceStatusDiv.innerText.includes('Checking')) {
+                // Keep original functionality, just style is already set
+                const originalText = deviceStatusDiv.innerText;
+                // Also attach listeners for camera access to update message nicely
+                if (navigator.mediaDevices) {
+                    // Not overriding exam.js, just adding cosmetic class
+                    const videoElem = document.getElementById('video');
+                    if (videoElem) {
+                        videoElem.addEventListener('loadeddata', () => {
+                            const camStatus = document.getElementById('cameraStatus');
+                            if (camStatus) camStatus.innerHTML = '✅ Camera active';
+                            if (deviceStatusDiv) deviceStatusDiv.innerHTML = '✅ Monitoring active • Camera & microphone ready';
+                        });
+                    }
+                }
+            }
+        }
+        
+        // Ensure timer styling is consistent
+        function enhanceTimer() {
+            const timerDiv = document.getElementById('timer');
+            if (timerDiv && timerDiv.innerText) {
+                // Ensure initial value (exam.js updates it)
+                if (timerDiv.innerText === '60:00') {
+                    // nice
+                }
+            }
+        }
+        
+        // Make round title dynamic based on section (compatible)
+        function enhanceRoundTitle() {
+            const roundTitleSpan = document.getElementById('roundTitle');
+            if (roundTitleSpan && window.currentRound) {
+                // will be updated by exam.js anyway, just preserve
+            }
+        }
+        
+        // Add keyboard navigation (optional but professional)
+        function addKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    const prevBtn = document.getElementById('prevBtn');
+                    if (prevBtn && !prevBtn.disabled) {
+                        prevBtn.click();
+                        e.preventDefault();
+                    }
+                } else if (e.key === 'ArrowRight') {
+                    const nextBtn = document.getElementById('nextBtn');
+                    if (nextBtn && !nextBtn.disabled) {
+                        nextBtn.click();
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+        
+        // Run after exam.js loads (defer but run asap)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    enhanceQuestionDisplay();
+                    enhanceDeviceStatus();
+                    enhanceTimer();
+                    addKeyboardShortcuts();
+                }, 100);
+            });
+        } else {
+            setTimeout(() => {
+                enhanceQuestionDisplay();
+                enhanceDeviceStatus();
+                enhanceTimer();
+                addKeyboardShortcuts();
+            }, 100);
+        }
+        
+        // Also listen for exam.js to fully initialize (poll for totalQuestions)
+        let attempts = 0;
+        const interval = setInterval(() => {
+            if (window.totalQuestions || window.questionsList) {
+                if (window.totalQuestions) window.totalQuestions = window.totalQuestions;
+                else if (window.questionsList && window.questionsList.length) window.totalQuestions = window.questionsList.length;
+                clearInterval(interval);
+                enhanceQuestionDisplay();
+            }
+            attempts++;
+            if (attempts > 50) clearInterval(interval);
+        }, 200);
+    })();
+</script>
+</body>
+
+</html>

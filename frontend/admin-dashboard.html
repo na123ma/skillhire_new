@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Classy Control Panel</title>
+    <style>
+      /* ============================================
+         CLASSY ADMIN DASHBOARD - REFINED LAYOUT
+         All connections preserved (IDs, classes, buttons)
+         ============================================ */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', Roboto, Helvetica, Arial, sans-serif;
+        background: linear-gradient(145deg, #eef2f9 0%, #e8edf5 100%);
+        color: #1a2c3e;
+        line-height: 1.5;
+        min-height: 100vh;
+        padding: 2rem;
+        position: relative;
+      }
+
+      /* Subtle background pattern */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.02) 0%, transparent 80%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Container - elegant wide layout */
+      .container {
+        max-width: 1351px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .admin-page {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+
+      /* ========== CARDS - GLASS/MODERN ELEGANCE ========== */
+      .card {
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(0px);
+        border-radius: 28px;
+        box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+        padding: 1.75rem 2rem;
+        transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 24px 42px -16px rgba(0, 0, 0, 0.12);
+        background: white;
+      }
+
+      /* Hero card with accent */
+      .hero-card {
+        background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+        border-bottom: none;
+        border-top: 4px solid #3b82f6;
+        padding: 2rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: '● ● ●';
+        position: absolute;
+        bottom: 1rem;
+        right: 2rem;
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        color: #cbd5e1;
+        opacity: 0.5;
+        font-weight: 300;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #1e293b 0%, #2d3a4e 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+      }
+
+      .hero-card p {
+        color: #5b6e8c;
+        font-size: 0.95rem;
+        margin-top: 0.25rem;
+        max-width: 80%;
+        font-weight: 400;
+      }
+
+      /* ========== BUTTONS - REFINED, COMPACT, CLASSY ========== */
+      .actions {
+        display: flex;
+        gap: 0.85rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .actions #logoutBtn {
+        width: 10%;
+        min-width: 110px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.45rem 1.2rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        font-family: inherit;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+        background: #3b82f6;
+        color: white;
+        line-height: 1.4;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        width: auto;
+        backdrop-filter: blur(2px);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .btn:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px -8px rgba(59, 130, 246, 0.4);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn.secondary {
+        background: transparent;
+        color: #4b5563;
+        border: 1px solid #e2e8f0;
+        box-shadow: none;
+        backdrop-filter: none;
+      }
+
+      .btn.secondary:hover {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+        color: #1f2937;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.08);
+      }
+
+      /* ========== STAT GRID - ELEGANT METRICS ========== */
+      .grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .two-cols {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .grid.two-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stat-card {
+        text-align: left;
+        padding: 1.5rem 1.8rem;
+        background: white;
+        border-radius: 28px;
+        border-left: none;
+        transition: all 0.25s ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #f0f2f5;
+        box-shadow: 0 5px 14px -8px rgba(0, 0, 0, 0.04);
+      }
+
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 20%;
+        height: 60%;
+        width: 4px;
+        background: linear-gradient(180deg, #3b82f6, #60a5fa);
+        border-radius: 4px;
+      }
+
+      .stat-card h2 {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #6c7a91;
+        margin-bottom: 0.6rem;
+        font-weight: 600;
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+
+      /* subtle icons via pseudo (optional elegance) */
+      .stat-card:first-child strong::before {
+        content: '👥 ';
+        font-weight: 400;
+        font-size: 1.8rem;
+        opacity: 0.7;
+        margin-right: 6px;
+      }
+
+      /* ========== TABLE - CLEAN & READABLE ========== */
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f1f5f9;
+      }
+
+      .card-header h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #1e293b, #334155);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.3px;
+      }
+
+      #statusText {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.9rem;
+        background: #f0f4fe;
+        color: #2563eb;
+        border-radius: 30px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      #statusText::before {
+        content: "⏺";
+        font-size: 8px;
+        color: #3b82f6;
+      }
+
+      /* Table wrapper - smooth scroll */
+      .table-wrap {
+        overflow-x: auto;
+        border-radius: 20px;
+        margin-top: 0.25rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 0.85rem;
+      }
+
+      thead tr {
+        background: #fafcff;
+      }
+
+      th {
+        text-align: left;
+        padding: 1rem 1rem;
+        font-weight: 600;
+        color: #4a5a72;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        border-bottom: 1.5px solid #e9edf2;
+      }
+
+      td {
+        padding: 1rem 1rem;
+        border-bottom: 1px solid #f0f3f8;
+        color: #2c3e50;
+        font-weight: 450;
+      }
+
+      tbody tr {
+        transition: all 0.2s ease;
+        border-radius: 16px;
+      }
+
+      tbody tr:hover {
+        background: #fafcff;
+        transform: scale(1.002);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      }
+
+      /* Specific column styling for elegance */
+      td:nth-child(3) {
+        font-weight: 600;
+        color: #2563eb;
+        font-family: monospace;
+        font-size: 0.9rem;
+      }
+
+      td:nth-child(4) {
+        font-weight: 500;
+        background: linear-gradient(145deg, #f8fafc, transparent);
+        border-radius: 20px;
+      }
+
+      td:nth-child(5) {
+        font-weight: 500;
+        color: #e11d48;
+      }
+
+      td:last-child {
+        color: #6c86a3;
+        font-size: 0.75rem;
+        font-feature-settings: 'tnum';
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Empty state style */
+      tbody:has(td[colspan]) td {
+        text-align: center;
+        padding: 3rem;
+        color: #94a3b8;
+        font-style: italic;
+        background: #fefefe;
+        border-radius: 24px;
+      }
+
+      /* ========== RESPONSIVE PERFECTION ========== */
+      @media (max-width: 1100px) {
+        .grid.two-cols {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hero-card p {
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+        .card {
+          padding: 1.3rem;
+        }
+        .hero-card {
+          padding: 1.5rem;
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+        .stat-card strong {
+          font-size: 2rem;
+        }
+        .card-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .grid.two-cols {
+          grid-template-columns: 1fr;
+        }
+        .btn {
+          padding: 0.4rem 1rem;
+          font-size: 0.75rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .actions {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+        .btn {
+          white-space: nowrap;
+        }
+        th, td {
+          padding: 0.7rem 0.6rem;
+          font-size: 0.7rem;
+        }
+        th {
+          font-size: 0.65rem;
+        }
+      }
+
+      /* Scrollbar classy */
+      ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #eef2f9;
+        border-radius: 12px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e6;
+        border-radius: 12px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* Print support */
+      @media print {
+        body {
+          background: white;
+          padding: 0.5rem;
+        }
+        .btn, .actions {
+          display: none;
+        }
+        .card {
+          box-shadow: none;
+          border: 1px solid #ddd;
+          break-inside: avoid;
+        }
+      }
+
+      /* subtle focus rings */
+      .btn:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container admin-page">
+      <!-- Hero section - all IDs and classes untouched -->
+      <section class="card hero-card">
+        <h1>Admin Dashboard</h1>
+        <p>Monitor candidate performance, review violations, and export results in one place.</p>
+        <div class="actions">
+          <button id="logoutBtn" class="btn secondary">Logout</button>
+          <button id="exportBtn" class="btn">Export CSV</button>
+        </div>
+      </section>
+
+      <!-- Stats row: all connections maintained -->
+      <section class="grid two-cols">
+        <article class="card stat-card">
+          <h2>Total Users</h2>
+          <strong id="totalUsers">0</strong>
+        </article>
+        <article class="card stat-card">
+          <h2>Total Results</h2>
+          <strong id="totalResults">0</strong>
+        </article>
+        <article class="card stat-card">
+          <h2>Total Violations</h2>
+          <strong id="totalViolations">0</strong>
+        </article>
+      </section>
+
+      <!-- Results Table Section: original structure intact -->
+      <section class="card">
+        <div class="card-header">
+          <h2>Candidate Results</h2>
+          <span id="statusText">Loading results…</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>Email</th>
+                <th>Score</th>
+                <th>Percentage</th>
+                <th>Violations</th>
+                <th>Submitted</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="resultsTableBody">
+              <!-- Dynamic rows injected via admin.js - connection preserved -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Your existing admin.js file remains fully functional -->
+    <script src="js/admin.js"></script>
+  </body>
+</html>

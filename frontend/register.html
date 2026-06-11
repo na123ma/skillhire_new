@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ecstasy Registration</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dfd9d9;
+        }
+
+        .container {
+            display: flex;
+            width: 986px;
+            background-color: #0f0f0f;
+            min-height: 580px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+        }
+
+        .brand-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-panel span {
+            color: #fff;
+            font-size: 26px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-panel img {
+            margin-top: -8px;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .circle-1 { width: 280px; height: 280px; top: -60px; right: -60px; }
+        .circle-2 { width: 200px; height: 200px; top: -30px; right: -30px; border-color: rgba(255,255,255,0.06); }
+        .circle-3 { width: 300px; height: 300px; bottom: -80px; left: -60px; border-color: rgba(255,255,255,0.07); }
+        .circle-4 { width: 200px; height: 200px; bottom: -50px; left: -30px; border-color: rgba(255,255,255,0.05); }
+
+        .form-panel {
+            flex: 1;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-top:10px;
+            margin-bottom:10px;
+            overflow-y: auto;
+        }
+
+        .form-panel h2 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #111;
+        }
+
+        .form-panel .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 1.2rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 42%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #aaa;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 10px 12px 10px 36px;
+            border: 0.5px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            background: #f9f9f9;
+            color: #111;
+            outline: none;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #aaa;
+            background: #fff;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .grid-2 .input-wrapper {
+            margin-bottom: 0;
+        }
+
+        small {
+            display: block;
+            color: #94a3b8;
+            font-size: 11px;
+            margin-bottom: 10px;
+            padding-left: 2px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 11px;
+            background: #0f0f0f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            letter-spacing: 0.02em;
+            margin-top: 8px;
+        }
+
+        button[type="submit"]:hover { background: #2a2a2a; }
+
+        .footer-text {
+            font-size: 13px;
+            color: #888;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .footer-text a {
+            color: #111;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="brand-panel">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="circle circle-4"></div>
+        <img src="images/my_Ecstacy.png.png" width="21%" height="60px" />
+        <span>ECSTASY</span>
+        <p style="font-size: 18px; color: white; margin-left: 0px; margin-top:30px">Skill Hire</p>
+    </div>
+
+    <div class="form-panel">
+        <h2>Hello!</h2>
+        <p class="subtitle">Sign Up to Get Started</p>
+
+        <p id="statusMessage" style="color:#dc2626; font-size:0.85rem; min-height:1rem; margin-bottom:0.4rem;"></p>
+
+        <form id="registerForm">
+
+            <div class="input-wrapper">
+                <i class="ti ti-user"></i>
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+
+            <div class="input-wrapper" style="margin-bottom:4px;">
+                <i class="ti ti-mail"></i>
+                <input type="email" id="email" placeholder="Email Address" required>
+            </div>
+            <small>Use a valid email address such as name@domain.com.</small>
+
+            <div class="grid-2">
+                <div class="input-wrapper">
+                    <i class="ti ti-id-badge"></i>
+                    <input type="text" id="rollNo" placeholder="Roll Number" required>
+                </div>
+                <div class="input-wrapper">
+                    <i class="ti ti-building"></i>
+                    <input type="text" id="collegeName" placeholder="College Name" required>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="input-wrapper">
+                    <i class="ti ti-phone"></i>
+                    <input type="text" id="phoneNumber" placeholder="Phone Number" required>
+                </div>
+                <div class="input-wrapper">
+                    <i class="ti ti-calendar"></i>
+                    <input type="number" id="passedYear" placeholder="Passed Year" required>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="input-wrapper">
+                    <i class="ti ti-hash"></i>
+                    <input type="text" id="batchNo" placeholder="Batch Number" required>
+                </div>
+                <div class="input-wrapper">
+                    <i class="ti ti-git-branch"></i>
+                    <input type="text" id="branch" placeholder="Branch" required>
+                </div>
+            </div>
+
+            <div class="input-wrapper" style="margin-bottom:4px;">
+                <i class="ti ti-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <small>Min 8 characters with uppercase, lowercase, number &amp; special character.</small>
+
+            <div class="input-wrapper" style="margin-bottom:18px;">
+                <i class="ti ti-lock-check"></i>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p class="footer-text">
+            Already registered? <a href="login.html">Login</a>
+        </p>
+    </div>
+
+</div>
+
+<script src="./js/register.js"></script>
+
+</body>
+</html>
