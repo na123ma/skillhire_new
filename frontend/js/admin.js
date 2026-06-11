@@ -96,7 +96,7 @@ async function loadAdminData() {
 
 async function downloadCandidateAnswers(userId) {
   try {
-    const response = await fetch(`http://localhost:5080/api/admin/results/export/${userId}`, {
+    const response = await fetch(`https://skillhire-new.onrender.com/api/admin/results/export/${userId}`, {
       headers: { Authorization: "Bearer " + token }
     });
 
